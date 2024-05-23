@@ -35,6 +35,11 @@
             Clear Input
         </button>
 
+        <div class="ms-1 form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="filter_text" value="option1" onchange="onGenerate()" />
+            <label class="form-check-label" for="filter_text">Filter Text</label>
+        </div>
+
         <section class="my-3" id="text_section">
         </section>
 
@@ -61,6 +66,8 @@
             const url = new URL(link).searchParams;
             const name = url.get('invite')
 
+            const useFilterText = $('#filter_text').is(':checked')
+
             $('#text_section').html(`Kepada Yth,
 Bapak/Ibu/Sdr/i
 *${name}*
@@ -85,6 +92,10 @@ Ian Ahmad & Febi Ananda
 Beserta keluarga besar
 
 *Wassalamualaikum Warahmatullahi Wabarakatuh*`);
+
+            if (useFilterText) {
+                $('#text_section').html($('#text_section').html().replaceAll('*', '').replaceAll('_', ''))
+            }
         }
 
         function onClearInput() {
